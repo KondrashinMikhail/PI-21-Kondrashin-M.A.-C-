@@ -12,8 +12,8 @@ namespace WindowsFormsExcavator
         protected float startPosX;
         protected float startPosY;
         
-        protected int _pictureWidth = 900;
-        protected int _pictureHeight = 500;
+        protected int _pictureWidth;
+        protected int _pictureHeight;
 
         public int MaxSpeed { protected set; get; }
         public float Weight { protected set; get; }
@@ -23,6 +23,8 @@ namespace WindowsFormsExcavator
         {
             startPosX = width / 2 + x;
             startPosY = height / 2 + y;
+            _pictureWidth = width;
+            _pictureHeight = height;
         }
 
         public abstract void MoveExcavator(Direction direction);
