@@ -12,7 +12,7 @@ namespace WindowsFormsExcavator
 {
     public partial class ExcavatorForm : Form
     {
-        private Excavavtor excavator;
+        private ITransport excavator;
         public ExcavatorForm()
         {
             InitializeComponent();
@@ -24,11 +24,18 @@ namespace WindowsFormsExcavator
             excavator.DrawExcavator(g);
             pictureBoxExcavator.Image = bmp;
         }
-        private void buttonCreate_Click(object sender, EventArgs e)
+
+        private void buttonCreate_usual_excavator_Click(object sender, EventArgs e)
         {
             Random random = new Random();
-            excavator = new Excavavtor();
-            excavator.Init(random.Next(100, 150), random.Next(2000, 3000), Color.DarkKhaki, Color.Black, true, true);
+            excavator = new Excavator(random.Next(100, 150), random.Next(2000, 3000), Color.Orange);
+            excavator.SetPosition(random.Next(0, 100), random.Next(0, 100), pictureBoxExcavator.Width, pictureBoxExcavator.Height);
+            Draw();
+        }
+        private void buttonCreate_bucket_excavator_Click(object sender, EventArgs e)
+        {
+            Random random = new Random();
+            excavator = new BucketExcavavtor(random.Next(100, 150), random.Next(2000, 3000), Color.DarkKhaki, Color.Black, true, true);
             excavator.SetPosition(random.Next(0, 100), random.Next(0, 100), pictureBoxExcavator.Width, pictureBoxExcavator.Height);
             Draw();
         }
@@ -51,9 +58,6 @@ namespace WindowsFormsExcavator
                     break;
             }
             Draw();
-
         }
-
-       
     }
 }
