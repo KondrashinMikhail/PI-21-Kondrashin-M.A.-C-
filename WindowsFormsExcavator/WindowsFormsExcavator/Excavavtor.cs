@@ -14,8 +14,8 @@ namespace WindowsFormsExcavator
 
 		
 
-		private int _pictureWidth;//900
-        private int _pictureHeight;//500
+		private int _pictureWidth;
+        private int _pictureHeight;
 
         private readonly int excavatorWidth = 150;
         private readonly int excavatorHeight = 70;
@@ -27,21 +27,23 @@ namespace WindowsFormsExcavator
         public bool FrontBucket { private set; get; }
         public bool BackBucket { private set; get; }
 
-        public void Init(int maxSpeed, float weight, Color mainColor, Color dopColor, bool frontBucket, bool backBucket, int pictureHeight, int pictureWidth) {
+        public void Init(int maxSpeed, float weight, Color mainColor, Color dopColor, bool frontBucket, bool backBucket){
             MaxSpeed = maxSpeed;
             Weight = weight;
             MainColor = mainColor;
             DopColor = dopColor;
             FrontBucket = frontBucket;
             BackBucket = backBucket;
-			this._pictureHeight = pictureHeight;
-			this._pictureWidth = pictureWidth;
         }
 
         public void SetPosition(int x, int y, int width, int height) {
             startPosX = width / 2 - excavatorWidth + x;
             startPosY = height / 2 + excavatorHeight / 2 + y;
-        }
+			_pictureWidth = width;
+			_pictureHeight = height;
+
+
+		}
 
         public void MoveExcavator(Direction direction) {
             float step = MaxSpeed * 100 / Weight;

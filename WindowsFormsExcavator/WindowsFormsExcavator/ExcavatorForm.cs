@@ -28,7 +28,7 @@ namespace WindowsFormsExcavator
         {
             Random random = new Random();
             excavator = new Excavavtor();
-            excavator.Init(random.Next(100, 150), random.Next(2000, 3000), Color.DarkKhaki, Color.Black, true, true, this.Height, this.Width);
+            excavator.Init(random.Next(100, 150), random.Next(2000, 3000), Color.DarkKhaki, Color.Black, true, true);
             excavator.SetPosition(random.Next(0, 100), random.Next(0, 100), pictureBoxExcavator.Width, pictureBoxExcavator.Height);
             Draw();
         }
