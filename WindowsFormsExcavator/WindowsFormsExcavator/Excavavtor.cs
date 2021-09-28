@@ -7,13 +7,15 @@ using System.Drawing;
 
 namespace WindowsFormsExcavator
 {
-    class Excavavtor
-    {
-        private float startPosX;
-        private float startPosY;
+	class Excavavtor
+	{
+		private float startPosX;
+		private float startPosY;
 
-        private int _pictureWidth = 900;
-        private int _pictureHeight = 500;
+		
+
+		private int _pictureWidth;//900
+        private int _pictureHeight;//500
 
         private readonly int excavatorWidth = 150;
         private readonly int excavatorHeight = 70;
@@ -25,13 +27,15 @@ namespace WindowsFormsExcavator
         public bool FrontBucket { private set; get; }
         public bool BackBucket { private set; get; }
 
-        public void Init(int maxSpeed, float weight, Color mainColor, Color dopColor, bool frontBucket, bool backBucket) {
+        public void Init(int maxSpeed, float weight, Color mainColor, Color dopColor, bool frontBucket, bool backBucket, int pictureHeight, int pictureWidth) {
             MaxSpeed = maxSpeed;
             Weight = weight;
             MainColor = mainColor;
             DopColor = dopColor;
             FrontBucket = frontBucket;
             BackBucket = backBucket;
+			this._pictureHeight = pictureHeight;
+			this._pictureWidth = pictureWidth;
         }
 
         public void SetPosition(int x, int y, int width, int height) {
@@ -48,7 +52,7 @@ namespace WindowsFormsExcavator
                     break;
                 
 				case Direction.Up:
-                    if (startPosY > 20)
+                    if (startPosY > 0)
                         startPosY -= step;
                     break;
                 case Direction.Left:
