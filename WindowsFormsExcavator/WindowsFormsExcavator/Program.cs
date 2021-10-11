@@ -16,7 +16,7 @@ namespace WindowsFormsExcavator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ExcavatorForm());
+            Application.Run(new ParkingForm());
         }
     }
 }

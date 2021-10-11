@@ -18,10 +18,17 @@ namespace WindowsFormsExcavator
             InitializeComponent();
         }
 
-        private void Draw() {
+        public void SetExcavator(ITransport excavator)
+        {
+            this.excavator = excavator;
+            Draw();
+        }
+
+        private void Draw()
+        {
             Bitmap bmp = new Bitmap(pictureBoxExcavator.Width, pictureBoxExcavator.Height);
             Graphics g = Graphics.FromImage(bmp);
-            excavator.DrawExcavator(g);
+            excavator?.DrawExcavator(g);
             pictureBoxExcavator.Image = bmp;
         }
 
@@ -40,21 +47,22 @@ namespace WindowsFormsExcavator
             Draw();
         }
 
-        private void buttonMove_Click(object sender, EventArgs e) {
+        private void buttonMove_Click(object sender, EventArgs e)
+        {
             string name = (sender as Button).Name;
             switch (name)
             {
                 case "buttonUp":
-                    excavator.MoveExcavator(Direction.Up);
+                    excavator?.MoveExcavator(Direction.Up);
                     break;
                 case "buttonDown":
-                    excavator.MoveExcavator(Direction.Down);
+                    excavator?.MoveExcavator(Direction.Down);
                     break;
                 case "buttonLeft":
-                    excavator.MoveExcavator(Direction.Left);
+                    excavator?.MoveExcavator(Direction.Left);
                     break;
                 case "buttonRight":
-                    excavator.MoveExcavator(Direction.Right);
+                    excavator?.MoveExcavator(Direction.Right);
                     break;
             }
             Draw();
