@@ -42,7 +42,7 @@ namespace WindowsFormsExcavator
             // 
             // buttonParkingExcavator
             // 
-            this.buttonParkingExcavator.Location = new System.Drawing.Point(684, 12);
+            this.buttonParkingExcavator.Location = new System.Drawing.Point(768, 12);
             this.buttonParkingExcavator.Name = "buttonParkingExcavator";
             this.buttonParkingExcavator.Size = new System.Drawing.Size(104, 36);
             this.buttonParkingExcavator.TabIndex = 1;
@@ -52,7 +52,7 @@ namespace WindowsFormsExcavator
             // 
             // buttonParkingBucketExcavator
             // 
-            this.buttonParkingBucketExcavator.Location = new System.Drawing.Point(684, 54);
+            this.buttonParkingBucketExcavator.Location = new System.Drawing.Point(768, 54);
             this.buttonParkingBucketExcavator.Name = "buttonParkingBucketExcavator";
             this.buttonParkingBucketExcavator.Size = new System.Drawing.Size(104, 48);
             this.buttonParkingBucketExcavator.TabIndex = 2;
@@ -65,7 +65,7 @@ namespace WindowsFormsExcavator
             this.groupBoxGetExcavator.Controls.Add(this.buttonGetExcavator);
             this.groupBoxGetExcavator.Controls.Add(this.maskedTextBoxPlace);
             this.groupBoxGetExcavator.Controls.Add(this.labelPlace);
-            this.groupBoxGetExcavator.Location = new System.Drawing.Point(684, 108);
+            this.groupBoxGetExcavator.Location = new System.Drawing.Point(768, 108);
             this.groupBoxGetExcavator.Name = "groupBoxGetExcavator";
             this.groupBoxGetExcavator.Size = new System.Drawing.Size(112, 88);
             this.groupBoxGetExcavator.TabIndex = 3;
@@ -100,9 +100,9 @@ namespace WindowsFormsExcavator
             // 
             // pictureBoxParking
             // 
-            this.pictureBoxParking.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxParking.Location = new System.Drawing.Point(2, 1);
             this.pictureBoxParking.Name = "pictureBoxParking";
-            this.pictureBoxParking.Size = new System.Drawing.Size(678, 450);
+            this.pictureBoxParking.Size = new System.Drawing.Size(750, 450);
             this.pictureBoxParking.TabIndex = 4;
             this.pictureBoxParking.TabStop = false;
             // 
@@ -110,7 +110,7 @@ namespace WindowsFormsExcavator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(884, 461);
             this.Controls.Add(this.pictureBoxParking);
             this.Controls.Add(this.groupBoxGetExcavator);
             this.Controls.Add(this.buttonParkingBucketExcavator);

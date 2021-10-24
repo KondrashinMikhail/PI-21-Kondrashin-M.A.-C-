@@ -13,6 +13,7 @@ namespace WindowsFormsExcavator
     public partial class ExcavatorForm : Form
     {
         private ITransport excavator;
+        
         public ExcavatorForm()
         {
             InitializeComponent();
@@ -62,7 +63,8 @@ namespace WindowsFormsExcavator
                     excavator?.MoveExcavator(Direction.Left);
                     break;
                 case "buttonRight":
-                    excavator?.MoveExcavator(Direction.Right);
+                    excavator?
+                        .MoveExcavator(Direction.Right);
                     break;
             }
             Draw();
