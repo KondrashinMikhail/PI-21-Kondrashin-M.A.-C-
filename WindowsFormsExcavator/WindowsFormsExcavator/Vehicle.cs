@@ -21,8 +21,8 @@ namespace WindowsFormsExcavator
 
         public void SetPosition(int x, int y, int width, int height)
         {
-            startPosX = width / 2 + x;
-            startPosY = height / 2 + y;
+            startPosX =  x;
+            startPosY =  y;
             _pictureWidth = width;
             _pictureHeight = height;
         }
