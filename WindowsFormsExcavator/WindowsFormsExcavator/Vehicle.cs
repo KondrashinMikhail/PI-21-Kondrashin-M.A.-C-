@@ -30,5 +30,9 @@ namespace WindowsFormsExcavator
         public abstract void MoveExcavator(Direction direction);
         public abstract void DrawExcavator(Graphics g);
 
+        public void SetMainColor(Color color) 
+        {
+            MainColor = color;
+        }
     }
 }

@@ -39,6 +39,11 @@ namespace WindowsFormsExcavator
 
         }
 
+        private void listBoxParkings_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Draw();
+        }
+
         public void Draw()
         {
             if (listBoxParkings.SelectedIndex > -1)
@@ -47,51 +52,6 @@ namespace WindowsFormsExcavator
                 Graphics gr = Graphics.FromImage(bmp);
                 parkingCollection[listBoxParkings.SelectedItem.ToString()].Draw(gr);
                 pictureBoxParking.Image = bmp;
-            }
-
-        }
-
-        private void buttonParkingExcavator_Click(object sender, EventArgs e)
-        {
-            if (listBoxParkings.SelectedIndex > -1)
-            {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    var excavator = new Excavator(100, 1000, dialog.Color);
-                    if (parkingCollection[listBoxParkings.SelectedItem.ToString()] + excavator)
-                    {
-                        Draw();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Парковка переполнена");
-                    }
-                }
-            }
-        }
-
-        private void buttonParkingBucketExcavator_Click(object sender, EventArgs e)
-        {
-            if (listBoxParkings.SelectedIndex > -1)
-            {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    ColorDialog dialogDop = new ColorDialog();
-                    if (dialogDop.ShowDialog() == DialogResult.OK)
-                    {
-                        var bucketExcavator = new BucketExcavavtor(100, 1000, dialog.Color, dialogDop.Color, true, true);
-                    if (parkingCollection[listBoxParkings.SelectedItem.ToString()] + bucketExcavator)
-                        {
-                            Draw();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Парковка переполнена");
-                        }
-                    }
-                }
             }
 
         }
@@ -134,7 +94,28 @@ namespace WindowsFormsExcavator
                     ReloadLevels();
                 }
             }
+        }
 
+        private void AddCar(Vehicle car)
+        {
+            if (car != null && listBoxParkings.SelectedIndex > -1)
+            {
+                if ((parkingCollection[listBoxParkings.SelectedItem.ToString()]) + car)
+                {
+                    Draw();
+                }
+                else
+                {
+                    MessageBox.Show("Машину не удалось поставить");
+                }
+            }
+        }
+
+        private void buttonAddExcavator_Click(object sender, EventArgs e)
+        {
+            var fec = new FormExcavatorConfig();
+            fec.AddEvent(AddCar);
+            fec.ShowDialog();
         }
     }
 }
