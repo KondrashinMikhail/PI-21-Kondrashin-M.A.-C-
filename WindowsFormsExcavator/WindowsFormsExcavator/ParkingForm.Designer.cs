@@ -29,8 +29,7 @@ namespace WindowsFormsExcavator
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonParkingExcavator = new System.Windows.Forms.Button();
-            this.buttonParkingBucketExcavator = new System.Windows.Forms.Button();
+            this.buttonAddExcavator = new System.Windows.Forms.Button();
             this.groupBoxGetExcavator = new System.Windows.Forms.GroupBox();
             this.buttonGetExcavator = new System.Windows.Forms.Button();
             this.maskedTextBox = new System.Windows.Forms.MaskedTextBox();
@@ -45,25 +44,15 @@ namespace WindowsFormsExcavator
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxParking)).BeginInit();
             this.SuspendLayout();
             // 
-            // buttonParkingExcavator
+            // buttonAddExcavator
             // 
-            this.buttonParkingExcavator.Location = new System.Drawing.Point(708, 265);
-            this.buttonParkingExcavator.Name = "buttonParkingExcavator";
-            this.buttonParkingExcavator.Size = new System.Drawing.Size(104, 36);
-            this.buttonParkingExcavator.TabIndex = 1;
-            this.buttonParkingExcavator.Text = "Припарковать экскаватор";
-            this.buttonParkingExcavator.UseVisualStyleBackColor = true;
-            this.buttonParkingExcavator.Click += new System.EventHandler(this.buttonParkingExcavator_Click);
-            // 
-            // buttonParkingBucketExcavator
-            // 
-            this.buttonParkingBucketExcavator.Location = new System.Drawing.Point(708, 307);
-            this.buttonParkingBucketExcavator.Name = "buttonParkingBucketExcavator";
-            this.buttonParkingBucketExcavator.Size = new System.Drawing.Size(104, 48);
-            this.buttonParkingBucketExcavator.TabIndex = 2;
-            this.buttonParkingBucketExcavator.Text = "Припарковать экскаватор с ковшами";
-            this.buttonParkingBucketExcavator.UseVisualStyleBackColor = true;
-            this.buttonParkingBucketExcavator.Click += new System.EventHandler(this.buttonParkingBucketExcavator_Click);
+            this.buttonAddExcavator.Location = new System.Drawing.Point(708, 307);
+            this.buttonAddExcavator.Name = "buttonAddExcavator";
+            this.buttonAddExcavator.Size = new System.Drawing.Size(104, 48);
+            this.buttonAddExcavator.TabIndex = 2;
+            this.buttonAddExcavator.Text = "Добавить экскаватор";
+            this.buttonAddExcavator.UseVisualStyleBackColor = true;
+            this.buttonAddExcavator.Click += new System.EventHandler(this.buttonAddExcavator_Click);
             // 
             // groupBoxGetExcavator
             // 
@@ -118,6 +107,7 @@ namespace WindowsFormsExcavator
             this.listBoxParkings.Name = "listBoxParkings";
             this.listBoxParkings.Size = new System.Drawing.Size(104, 95);
             this.listBoxParkings.TabIndex = 5;
+            this.listBoxParkings.SelectedIndexChanged += new System.EventHandler(this.listBoxParkings_SelectedIndexChanged);
             // 
             // buttonAddParking
             // 
@@ -167,8 +157,7 @@ namespace WindowsFormsExcavator
             this.Controls.Add(this.listBoxParkings);
             this.Controls.Add(this.pictureBoxParking);
             this.Controls.Add(this.groupBoxGetExcavator);
-            this.Controls.Add(this.buttonParkingBucketExcavator);
-            this.Controls.Add(this.buttonParkingExcavator);
+            this.Controls.Add(this.buttonAddExcavator);
             this.Name = "ParkingForm";
             this.Text = "ParkingForm";
             this.groupBoxGetExcavator.ResumeLayout(false);
@@ -180,8 +169,7 @@ namespace WindowsFormsExcavator
         }
 
         #endregion
-        private System.Windows.Forms.Button buttonParkingExcavator;
-        private System.Windows.Forms.Button buttonParkingBucketExcavator;
+        private System.Windows.Forms.Button buttonAddExcavator;
         private System.Windows.Forms.GroupBox groupBoxGetExcavator;
         private System.Windows.Forms.Button buttonGetExcavator;
         private System.Windows.Forms.MaskedTextBox maskedTextBox;

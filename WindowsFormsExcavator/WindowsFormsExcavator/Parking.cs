@@ -79,7 +79,7 @@ namespace WindowsFormsExcavator
             DrawMarking(g);
             for (int i = 0; i < _places.Count; ++i)
             {
-                _places[i].SetPosition(5 + i / 5 * _placeSizeWidth + 5, i % 5 * _placeSizeHeight + 15, pictureWidth, pictureHeight);
+                _places[i].SetPosition(40 + i / 5 * _placeSizeWidth, i % 5 * _placeSizeHeight + 30, pictureWidth, pictureHeight);
                 _places[i].DrawExcavator(g);
             }
         }

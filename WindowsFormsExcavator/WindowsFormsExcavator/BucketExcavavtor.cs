@@ -70,6 +70,11 @@ namespace WindowsFormsExcavator
 
 			base.DrawExcavator(g);
 		}
+
+		public void SetDopColor(Color color) 
+		{
+			DopColor = color;
+		}
 	}
 }
 

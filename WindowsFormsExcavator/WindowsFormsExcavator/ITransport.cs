@@ -12,5 +12,7 @@ namespace WindowsFormsExcavator
         void SetPosition(int x, int y, int width, int height);
         void MoveExcavator(Direction direction);
         void DrawExcavator(Graphics g);
+
+        void SetMainColor(Color color);
     }
 }

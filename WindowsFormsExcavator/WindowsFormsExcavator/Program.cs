@@ -6,6 +6,7 @@ using System.Windows.Forms;
 
 namespace WindowsFormsExcavator
 {
+    public delegate void ExcavatorDelegate(Vehicle excavator);
     static class Program
     {
         /// <summary>
