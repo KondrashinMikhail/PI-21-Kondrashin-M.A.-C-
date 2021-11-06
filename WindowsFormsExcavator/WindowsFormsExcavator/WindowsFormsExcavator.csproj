@@ -57,7 +57,7 @@
     <Compile Include="ExcavatorForm.Designer.cs">
       <DependentUpon>ExcavatorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="BucketExcavavtor.cs" />
+    <Compile Include="BucketExcavator.cs" />
     <Compile Include="FormExcavatorConfig.cs">
       <SubType>Form</SubType>
     </Compile>
