@@ -35,30 +35,12 @@ namespace WindowsFormsExcavator
 
         public static bool operator +(Parking<T> p, T excavator)
         {
-            if (p._places.Count != p._maxCount)
+            if (p._places.Count < p._maxCount)
             {
-                int i = 0;
-
-                while (i < p.height)
-                {
-                    int j = 0;
-                    while (j < p.width)
-                    {
-                        excavator.SetPosition(5 + j * p._placeSizeWidth, 5 + i * p._placeSizeHeight, p.pictureWidth, p.pictureHeight);
-                        p._places.Add(excavator);
-                        return true;
-                        j++;
-                    }
-                    i++;
-                }
+                p._places.Add(excavator);
+                return true;
             }
-
-            else
-            {
-                return false;
-            }
-
-            return true;
+            return false;
         }
 
         public static T operator -(Parking<T> p, int index)
@@ -77,9 +59,9 @@ namespace WindowsFormsExcavator
         public void Draw(Graphics g)
         {
             DrawMarking(g);
-            for (int i = 0; i < _places.Count; ++i)
+            for (int i = 0; i < _places.Count; i++)
             {
-                _places[i].SetPosition(40 + i / 5 * _placeSizeWidth, i % 5 * _placeSizeHeight + 30, pictureWidth, pictureHeight);
+                _places[i].SetPosition(i % (pictureWidth / _placeSizeWidth) * _placeSizeWidth + 40, i / (pictureWidth / _placeSizeWidth) * _placeSizeHeight + 40, pictureWidth, pictureHeight);
                 _places[i].DrawExcavator(g);
             }
         }
@@ -105,7 +87,6 @@ namespace WindowsFormsExcavator
             }
             return _places[index];
         }
-
     }
 }
 
