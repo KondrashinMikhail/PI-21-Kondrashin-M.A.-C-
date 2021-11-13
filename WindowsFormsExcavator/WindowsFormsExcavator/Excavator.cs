@@ -13,6 +13,8 @@ namespace WindowsFormsExcavator
         protected readonly int excavatorWidth = 60;
         protected readonly int excavatorHeight = 60;
 
+        protected readonly char separator = ';';
+
         public Excavator(int maxSpeed, float weight, Color mainColor)
         {
             MainColor = mainColor;
@@ -27,6 +29,18 @@ namespace WindowsFormsExcavator
             Weight = weight;
             this.excavatorHeight = excavatorHeight;
             this.excavatorWidth = excavatorWidth;
+        }
+
+        public Excavator(string info) 
+        {
+            string[] strs = info.Split(separator);
+            if (strs.Length == 3) 
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+                MainColor = Color.FromName(strs[2]);
+
+            }
         }
 
         public override void MoveExcavator(Direction direction)
@@ -74,6 +88,11 @@ namespace WindowsFormsExcavator
             g.FillEllipse(grayBrush, startPosX, startPosY + 20, 20, 20);
             g.FillEllipse(grayBrush, startPosX + 40, startPosY + 20, 20, 20);
             g.FillEllipse(grayBrush, startPosX + 25, startPosY + 25, 10, 10);
+        }
+
+        public override string ToString()
+        {
+            return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.Name}";
         }
     }
 }

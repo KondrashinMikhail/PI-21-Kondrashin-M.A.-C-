@@ -7,19 +7,34 @@ using System.Drawing;
 
 namespace WindowsFormsExcavator
 {
-    class BucketExcavavtor : Excavator
+    class BucketExcavator : Excavator
     {
         public Color DopColor { private set; get; }
         public bool FrontBucket { private set; get; }
         public bool BackBucket { private set; get; }
 
-        public BucketExcavavtor(int maxSpeed, float weight, Color mainColor, Color dopColor, bool frontBucket, bool backBucket):
+        public BucketExcavator(int maxSpeed, float weight, Color mainColor, Color dopColor, bool frontBucket, bool backBucket):
 			base(maxSpeed, weight, mainColor, 170, 70)
 		{
             DopColor = dopColor;
             FrontBucket = frontBucket;
             BackBucket = backBucket;
         }
+
+		public BucketExcavator(string info):
+			base(info)
+		{
+			string[] strs = info.Split(separator);
+			if (strs.Length == 6)
+			{
+				MaxSpeed = Convert.ToInt32(strs[0]);
+				Weight = Convert.ToInt32(strs[1]);
+				MainColor = Color.FromName(strs[2]);
+				DopColor = Color.FromName(strs[3]);
+				FrontBucket = Convert.ToBoolean(strs[4]);
+				BackBucket = Convert.ToBoolean(strs[5]);
+			}
+		}
 
 		public override void DrawExcavator(Graphics g)
 		{
@@ -74,6 +89,11 @@ namespace WindowsFormsExcavator
 		public void SetDopColor(Color color) 
 		{
 			DopColor = color;
+		}
+
+		public override string ToString()
+		{
+			return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.Name}{separator}{DopColor.Name}{separator}{FrontBucket}{separator}{BackBucket}";
 		}
 	}
 }

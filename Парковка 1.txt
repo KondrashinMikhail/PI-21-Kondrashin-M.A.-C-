@@ -1,0 +1,4 @@
+ParkingCollection
+Parking:парковка 1
+Excavator:100;1000;Black
+BucketExcavator:100;1000;Black;Black;True;True
