@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
 
 namespace WindowsFormsExcavator
@@ -35,26 +32,23 @@ namespace WindowsFormsExcavator
 
         public static bool operator +(Parking<T> p, T excavator)
         {
-            if (p._places.Count < p._maxCount)
+            if (p._places.Count >= p._maxCount)
             {
-                p._places.Add(excavator);
-                return true;
+                throw new ParkingOverflowException();
             }
-            return false;
+            p._places.Add(excavator);
+            return true;
         }
 
         public static T operator -(Parking<T> p, int index)
         {
-            if (index > -1 && index < p._maxCount)
+            if (index < -1 || index > p._places.Count)
             {
-                T excavator = p._places[index];
-                p._places.RemoveAt(index);
-                return excavator;
+                throw new ParkingNotFoundException(index);
             }
-            else
-            {
-                return null;
-            }
+            T excavator = p._places[index];
+            p._places.RemoveAt(index);
+            return excavator;
         }
         public void Draw(Graphics g)
         {
