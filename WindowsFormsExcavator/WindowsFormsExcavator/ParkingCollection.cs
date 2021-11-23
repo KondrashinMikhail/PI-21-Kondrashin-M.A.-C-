@@ -115,7 +115,7 @@ namespace WindowsFormsExcavator
             }
             else
             {
-                throw new Exception("Неверный формат файла");
+                throw new FileFormatException("Неверный формат файла");
             }
             Vehicle excavator = null;
             string key = string.Empty;
@@ -141,9 +141,9 @@ namespace WindowsFormsExcavator
                 }
                 if (!(parkingStages[key] + excavator))
                 {
-                    throw new Exception("Не удалось загрузить автомобиль на парковку");
+                    throw new FileLoadException("Не удалось загрузить автомобиль на парковку");
                 }
-            }
+            }tually done seventh lab
         }
     }
 }
