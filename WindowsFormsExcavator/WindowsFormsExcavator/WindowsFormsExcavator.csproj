@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Direction.cs" />
     <Compile Include="Excavator.cs" />
+    <Compile Include="ExcavatorComparer.cs" />
     <Compile Include="ExcavatorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +76,7 @@
     </Compile>
     <Compile Include="ITransport.cs" />
     <Compile Include="Parking.cs" />
+    <Compile Include="ParkingAlreadyHaveException.cs" />
     <Compile Include="ParkingCollection.cs" />
     <Compile Include="ParkingForm.cs">
       <SubType>Form</SubType>

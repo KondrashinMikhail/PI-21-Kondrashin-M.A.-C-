@@ -55,13 +55,7 @@ namespace WindowsFormsExcavator
             }
         }
 
-        private void WriteToFile(string text, FileStream stream)
-        {
-            byte[] info = new UTF8Encoding(true).GetBytes(text);
-            stream.Write(info, 0, info.Length);
-        }
-
-        public void SaveData(string filename)
+        public bool SaveData(string filename)
         {
             if (File.Exists(filename))
             {
@@ -69,81 +63,89 @@ namespace WindowsFormsExcavator
             }
             using (FileStream fs = new FileStream(filename, FileMode.Create))
             {
-                WriteToFile($"ParkingCollection{Environment.NewLine}", fs);
-                foreach (var level in parkingStages)
+                using (StreamWriter sw = new StreamWriter(fs))
                 {
-                    WriteToFile($"Parking{separator}{level.Key}{Environment.NewLine}",
-                    fs);
-                    ITransport excavator = null;
-                    for (int i = 0; (excavator = level.Value.GetNext(i)) != null; i++)
+                    sw.Write($"ParkingCollection{Environment.NewLine}", fs);
+                    foreach (var level in parkingStages)
                     {
-                        if (excavator.GetType().Name == "Excavator")
+                        sw.Write($"Parking{separator}{level.Key}{Environment.NewLine}", fs);
+                        foreach (ITransport excavator in level.Value)
                         {
-                            WriteToFile($"Excavator{separator}", fs);
+                            if (excavator != null)
+                            {
+                                if (excavator.GetType().Name == "Excavator")
+                                {
+                                    sw.Write($"Excavator{separator}", fs);
+                                }
+                                if (excavator.GetType().Name == "BucketExcavator")
+                                {
+                                    sw.Write($"BucketExcavator{separator}", fs);
+                                }
+                                sw.Write(excavator + Environment.NewLine, fs);
+                            }
                         }
-                        if (excavator.GetType().Name == "BucketExcavator")
-                        {
-                            WriteToFile($"BucketExcavator{separator}", fs);
-                        }
-                        WriteToFile(excavator + Environment.NewLine, fs);
                     }
                 }
             }
+            return true;
         }
-       
-        public void LoadData(string filename)
+        public bool LoadData(string filename)
         {
-            if (!File.Exists(filename))
+            if (File.Exists(filename))
             {
-                throw new FileNotFoundException();
-            }
-            string bufferTextFromFile = "";
-            using (FileStream fs = new FileStream(filename, FileMode.Open))
-            {
-                byte[] b = new byte[fs.Length];
-                UTF8Encoding temp = new UTF8Encoding(true);
-                while (fs.Read(b, 0, b.Length) > 0)
+                using (StreamReader sr = new StreamReader(filename))
                 {
-                    bufferTextFromFile += temp.GetString(b);
+                    string line;
+                    string bufStr = "";
+                    bool check = false;
+
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        if (line.Contains("ParkingCollection"))
+                        {
+                            parkingStages.Clear();
+                            check = true;
+                            continue;
+                        }
+
+                        if (check)
+                        {
+                            Vehicle excavator = null;
+
+                            if (line.Contains("Parking:"))
+                            {
+                                bufStr = line.Split(separator)[1];
+                                parkingStages.Add(line.Split(separator)[1], new Parking<Vehicle>(pictureWidth, pictureHeight));
+                            }
+                            if (line.Split(separator)[0] == "Excavator")
+                            {
+                                excavator = new Excavator(line.Split(separator)[1]);
+                                if (bufStr != "")
+                                {
+                                    var result = parkingStages[bufStr] + excavator;
+                                }
+                            }
+                            else if (line.Split(separator)[0] == "BucketExcavator")
+                            {
+                                excavator = new BucketExcavator(line.Split(separator)[1]);
+                                if (bufStr != "")
+                                {
+                                    var result = parkingStages[bufStr] + excavator;
+                                }
+                            }
+                        }
+                    }
+                    if (!check || bufStr == "")
+                    {
+                        return false;
+                    }
                 }
-            }
-            bufferTextFromFile = bufferTextFromFile.Replace("\r", "");
-            var strs = bufferTextFromFile.Split('\n');
-            if (strs[0].Contains("ParkingCollection"))
-            {
-                parkingStages.Clear();
+                return true;
             }
             else
             {
-                throw new FileFormatException("Неверный формат файла");
+                return false;
             }
-            Vehicle excavator = null;
-            string key = string.Empty;
-            for (int i = 1; i < strs.Length; ++i)
-            {
-                if (strs[i].Contains("Parking"))
-                {
-                    key = strs[i].Split(separator)[1];
-                    parkingStages.Add(key, new Parking<Vehicle>(pictureWidth, pictureHeight));
-                    continue;
-                }
-                if (string.IsNullOrEmpty(strs[i]))
-                {
-                    continue;
-                }
-                if (strs[i].Split(separator)[0] == "Car")
-                {
-                    excavator = new Excavator(strs[i].Split(separator)[1]);
-                }
-                else if (strs[i].Split(separator)[0] == "SportCar")
-                {
-                    excavator = new BucketExcavator(strs[i].Split(separator)[1]);
-                }
-                if (!(parkingStages[key] + excavator))
-                {
-                    throw new FileLoadException("Не удалось загрузить автомобиль на парковку");
-                }
-            }tually done seventh lab
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using NLog;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace WindowsFormsExcavator
@@ -46,28 +47,10 @@ namespace WindowsFormsExcavator
         {
             if (listBoxParkings.SelectedIndex > -1)
             {
-                try
-                {
-                    var excavator = parkingCollection[listBoxParkings.SelectedItem.ToString()] -
-                   Convert.ToInt32(maskedTextBox.Text);
-                    if (excavator != null)
-                    {
-                        ExcavatorForm form = new ExcavatorForm();
-                        form.SetExcavator(excavator);
-                        form.ShowDialog();
-                        logger.Info($"Изъят автомобиль {excavator} с места { maskedTextBox.Text} ");
-                        Draw();
-                    }
-                }
-                catch (ParkingNotFoundException ex)
-                {
-                    MessageBox.Show(ex.Message, "Не найдено", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Неизвестная ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
+                Bitmap bmp = new Bitmap(pictureBoxParking.Width,pictureBoxParking.Height);
+                Graphics gr = Graphics.FromImage(bmp);
+                parkingCollection[listBoxParkings.SelectedItem.ToString()].Draw(gr);
+                pictureBoxParking.Image = bmp;
             }
 
         }
@@ -76,15 +59,28 @@ namespace WindowsFormsExcavator
         {
             if (listBoxParkings.SelectedIndex > -1 && maskedTextBox.Text != "")
             {
-                var excavator = parkingCollection[listBoxParkings.SelectedItem.ToString()] -
-               Convert.ToInt32(maskedTextBox.Text);
-                if (excavator != null)
+                try
                 {
-                    ExcavatorForm form = new ExcavatorForm();
-                    form.SetExcavator(excavator);
-                    form.ShowDialog();
+                    var excavator = parkingCollection[listBoxParkings.SelectedItem.ToString()] - Convert.ToInt32(maskedTextBox.Text);
+                    if (excavator != null)
+                    {
+                        ExcavatorForm form = new ExcavatorForm();
+                        form.SetExcavator(excavator);
+                        form.ShowDialog();
+                        logger.Info($"Изъят автомобиль {excavator} с места { maskedTextBox.Text}");
+                    Draw();
+                    }
                 }
-                Draw();
+                catch (ParkingNotFoundException ex)
+                {
+                    MessageBox.Show(ex.Message, "Не найдено", MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -135,6 +131,10 @@ namespace WindowsFormsExcavator
                 {
                     MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     logger.Warn(ex);
+                }
+                catch (ParkingAlreadyHaveException ex)
+                {
+                    MessageBox.Show(ex.Message, "Дублирование", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 catch (Exception ex)
                 {
@@ -193,6 +193,16 @@ namespace WindowsFormsExcavator
                     MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении", MessageBoxButtons.OK, MessageBoxIcon.Error); 
                     logger.Warn(ex);
                 }
+            }
+        }
+
+        private void buttonSort_Click(object sender, EventArgs e)
+        {
+            if (listBoxParkings.SelectedIndex > -1)
+            {
+                parkingCollection[listBoxParkings.SelectedItem.ToString()].Sort();
+                Draw();
+                logger.Info("Сортировка уровней");
             }
         }
     }
