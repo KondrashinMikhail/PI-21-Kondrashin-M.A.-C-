@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 
 namespace WindowsFormsExcavator
 {
-    class Parking<T> where T : class, ITransport
+    class Parking<T> : IEnumerator<T>, IEnumerable<T> 
+        where T : class, ITransport
     {
         private readonly List<T> _places;
 
@@ -15,6 +17,10 @@ namespace WindowsFormsExcavator
 
         private readonly int _placeSizeWidth = 210;
         private readonly int _placeSizeHeight = 80;
+
+        private int _currentIndex;
+        public T Current => _places[_currentIndex];
+        object IEnumerator.Current => _places[_currentIndex];
 
         private int width;
         private int height;
@@ -35,6 +41,10 @@ namespace WindowsFormsExcavator
             if (p._places.Count >= p._maxCount)
             {
                 throw new ParkingOverflowException();
+            }
+            if (p._places.Contains(excavator))
+            {
+                throw new ParkingAlreadyHaveException();
             }
             p._places.Add(excavator);
             return true;
@@ -81,6 +91,37 @@ namespace WindowsFormsExcavator
             }
             return _places[index];
         }
+
+        public void Sort() => _places.Sort((IComparer<T>)new ExcavatorComparer());
+
+        public void Dispose()
+        {
+        }
+        public bool MoveNext()
+        {
+            if (_currentIndex < _places.Count - 1)
+            {
+                _currentIndex++;
+                return true;
+            }
+            return false;
+        }
+        
+        public void Reset()
+        {
+            _currentIndex = -1;
+        }
+       
+        public IEnumerator<T> GetEnumerator()
+        {
+            return this;
+        }
+        
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this;
+        }
+
     }
 }
 

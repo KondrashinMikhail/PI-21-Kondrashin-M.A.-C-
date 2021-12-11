@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace WindowsFormsExcavator
 {
-    public class Excavator : Vehicle
+    public class Excavator : Vehicle, IEquatable<Excavator>
     {
         protected readonly int excavatorWidth = 60;
         protected readonly int excavatorHeight = 60;
@@ -93,6 +93,47 @@ namespace WindowsFormsExcavator
         public override string ToString()
         {
             return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.Name}";
+        }
+
+        public bool Equals(Excavator other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+            if (GetType().Name != other.GetType().Name)
+            {
+                return false;
+            }
+            if (MaxSpeed != other.MaxSpeed)
+            {
+                return false;
+            }
+            if (Weight != other.Weight)
+            {
+                return false;
+            }
+            if (MainColor != other.MainColor)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public override bool Equals(Object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj is Excavator excavatorObj))
+            {
+                return false;
+            }
+            else
+            {
+                return Equals(excavatorObj);
+            }
         }
     }
 }
