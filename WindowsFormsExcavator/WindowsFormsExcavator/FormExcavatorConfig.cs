@@ -81,7 +81,7 @@ namespace WindowsFormsExcavator
                     excavator = new Excavator((int)numericUpDownMaxSpeed.Value, (int)numericUpDownWeight.Value, Color.Black);
                     break;
                 case "Экскаватор с ковшами":
-                    excavator = new BucketExcavavtor((int)numericUpDownMaxSpeed.Value, (int)numericUpDownWeight.Value, Color.Black, Color.Black, checkBoxFrontBucket.Checked, checkBoxBackBucket.Checked);
+                    excavator = new BucketExcavator((int)numericUpDownMaxSpeed.Value, (int)numericUpDownWeight.Value, Color.Black, Color.Black, checkBoxFrontBucket.Checked, checkBoxBackBucket.Checked);
                     break;
             }
             DrawExcavatorTransport();
@@ -122,9 +122,9 @@ namespace WindowsFormsExcavator
         {
             if (excavator != null)
             {
-                if (excavator is BucketExcavavtor)
+                if (excavator is BucketExcavator)
                 {
-                    (excavator as BucketExcavavtor).SetDopColor((Color)e.Data.GetData(typeof(Color)));
+                    (excavator as BucketExcavator).SetDopColor((Color)e.Data.GetData(typeof(Color)));
                     DrawExcavatorTransport();
                 }
             }
@@ -138,3 +138,4 @@ namespace WindowsFormsExcavator
         }
     }
 }
+
