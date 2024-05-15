@@ -57,13 +57,33 @@
     <Compile Include="ExcavatorForm.Designer.cs">
       <DependentUpon>ExcavatorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="BucketExcavavtor.cs" />
+    <Compile Include="BucketExcavator.cs" />
+    <Compile Include="FormExcavatorConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormExcavatorConfig.Designer.cs">
+      <DependentUpon>FormExcavatorConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="ITransport.cs" />
+    <Compile Include="Parking.cs" />
+    <Compile Include="ParkingCollection.cs" />
+    <Compile Include="ParkingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ParkingForm.Designer.cs">
+      <DependentUpon>ParkingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Vehicle.cs" />
     <EmbeddedResource Include="ExcavatorForm.resx">
       <DependentUpon>ExcavatorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormExcavatorConfig.resx">
+      <DependentUpon>FormExcavatorConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ParkingForm.resx">
+      <DependentUpon>ParkingForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

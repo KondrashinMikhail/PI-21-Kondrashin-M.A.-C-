@@ -21,8 +21,8 @@ namespace WindowsFormsExcavator
 
         public void SetPosition(int x, int y, int width, int height)
         {
-            startPosX = width / 2 + x;
-            startPosY = height / 2 + y;
+            startPosX =  x;
+            startPosY =  y;
             _pictureWidth = width;
             _pictureHeight = height;
         }
@@ -30,5 +30,9 @@ namespace WindowsFormsExcavator
         public abstract void MoveExcavator(Direction direction);
         public abstract void DrawExcavator(Graphics g);
 
+        public void SetMainColor(Color color) 
+        {
+            MainColor = color;
+        }
     }
 }

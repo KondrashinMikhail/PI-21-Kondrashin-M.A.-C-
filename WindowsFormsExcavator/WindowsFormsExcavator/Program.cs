@@ -6,6 +6,7 @@ using System.Windows.Forms;
 
 namespace WindowsFormsExcavator
 {
+    public delegate void ExcavatorDelegate(Vehicle excavator);
     static class Program
     {
         /// <summary>
@@ -16,7 +17,7 @@ namespace WindowsFormsExcavator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ExcavatorForm());
+            Application.Run(new ParkingForm());
         }
     }
 }
