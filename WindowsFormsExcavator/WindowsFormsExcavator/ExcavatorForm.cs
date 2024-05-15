@@ -43,7 +43,7 @@ namespace WindowsFormsExcavator
         private void buttonCreate_bucket_excavator_Click(object sender, EventArgs e)
         {
             Random random = new Random();
-            excavator = new BucketExcavavtor(random.Next(100, 150), random.Next(2000, 3000), Color.DarkKhaki, Color.Black, true, true);
+            excavator = new BucketExcavator(random.Next(100, 150), random.Next(2000, 3000), Color.DarkKhaki, Color.Black, true, true);
             excavator.SetPosition(random.Next(0, 100), random.Next(0, 100), pictureBoxExcavator.Width, pictureBoxExcavator.Height);
             Draw();
         }
