@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace WindowsFormsExcavator
 {
@@ -56,7 +55,6 @@ namespace WindowsFormsExcavator
             }
         }
 
-
         public bool SaveData(string filename)
         {
             if (File.Exists(filename))
@@ -71,8 +69,7 @@ namespace WindowsFormsExcavator
                     foreach (var level in parkingStages)
                     {
                         sw.Write($"Parking{separator}{level.Key}{Environment.NewLine}", fs);
-                        ITransport excavator = null;
-                        for (int i = 0; (excavator = level.Value.GetNext(i)) != null; i++)
+                        foreach (ITransport excavator in level.Value)
                         {
                             if (excavator != null)
                             {
