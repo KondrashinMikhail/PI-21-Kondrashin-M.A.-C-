@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace WindowsFormsExcavator
 {
-    class BucketExcavator : Excavator
+    class BucketExcavator : Excavator, IEquatable<BucketExcavator>
     {
         public Color DopColor { private set; get; }
         public bool FrontBucket { private set; get; }
@@ -94,6 +94,44 @@ namespace WindowsFormsExcavator
 		public override string ToString()
 		{
 			return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.Name}{separator}{DopColor.Name}{separator}{FrontBucket}{separator}{BackBucket}";
+		}
+
+		public bool Equals(BucketExcavator other)
+		{
+			if (!base.Equals((Excavator)other))
+			{
+				return false;
+			}
+			else if (FrontBucket != other.FrontBucket)
+			{
+				return false;
+			}
+			else if (BackBucket != other.BackBucket)
+			{
+				return false;
+			}
+			else if (DopColor != other.DopColor)
+			{
+				return false;
+			}
+			return true;
+
+		}
+
+		public override bool Equals(Object obj)
+		{
+			if (obj == null)
+			{
+		    return false;
+			}
+			if (!(obj is BucketExcavator excavatorObj))
+			{
+				return false;
+			}
+			else
+			{
+				return Equals(excavatorObj);
+			}
 		}
 	}
 }
